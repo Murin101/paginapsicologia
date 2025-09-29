@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pausas Activas - Bienestar Laboral</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2c5282;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            font-weight: 300;
+        }
+
+        .progress-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .progress-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4299e1;
+            width: 0%;
+            transition: width 0.8s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #4299e1;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            color: #4299e1;
+        }
+
+        .tip {
+            background: #ebf8ff;
+            color: #2c5282;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-weight: 500;
+            border-left: 4px solid #4299e1;
+        }
+
+        .dato {
+            background: #f7fafc;
+            color: #4a5568;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-weight: 500;
+            border-left: 4px solid #4299e1;
+        }
+
+        .retos-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .retos-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .retos-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .reset-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+        }
+
+        .reto-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            background: #f7fafc;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .reto-item:hover {
+            background: #edf2f7;
+        }
+
+        .reto-item.completed {
+            background: #c6f6d5;
+            border-color: #38a169;
+        }
+
+        .reto-checkbox {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 3px solid #4299e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .reto-checkbox.checked {
+            background: #4299e1;
+            border-color: #4299e1;
+        }
+
+        .reto-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .reto-text {
+            flex: 1;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .reto-item.completed .reto-text {
+            text-decoration: line-through;
+            color: #38a169;
+        }
+
+        .timer-container {
+            text-align: center;
+            margin: 30px 0;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .timer {
+            display: inline-block;
+            background: #4299e1;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .timer-btn {
+            margin: 0 10px;
+            background: white;
+            color: #4299e1;
+            border: 2px solid #4299e1;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timer-btn:hover {
+            background: #4299e1;
+            color: white;
+        }
+
+        .recompensa-container {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 8px 20px rgba(56, 161, 105, 0.1);
+            border: 2px solid #38a169;
+            text-align: center;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .recompensa-container.show {
+            display: block;
+        }
+
+        .recompensa-badge {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #38a169;
+        }
+
+        .recompensa-titulo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #38a169;
+            margin-bottom: 15px;
+        }
+
+        .recompensa-mensaje {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .recompensa-tip {
+            background: #c6f6d5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #38a169;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            color: #4a5568;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .retos-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏃‍♀️ Pausas Activas 🏃‍♂️</h1>
+            <p class="subtitle">Promoviendo el movimiento para una mejor salud en el trabajo</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-title">🎯 Progreso de retos completados hoy</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0% completado</div>
+        </div>
+
+        <div class="recompensa-container" id="recompensaContainer">
+            <div class="recompensa-badge">🏆</div>
+            <h2 class="recompensa-titulo">¡Felicidades! Has completado todos los retos</h2>
+            <p class="recompensa-mensaje">Has ganado la <strong>Insignia de Bienestar Laboral</strong>. ¡Sigue así para mantener tu energía y productividad al máximo!</p>
+            <div class="recompensa-tip">
+                💡 <strong>Tip nutricional extra:</strong> Después de tus pausas activas, hidrátate con un vaso de agua y come una fruta para recargar energías.
+            </div>
+            <button class="reset-btn" onclick="resetRetos()" style="margin-top: 20px;">🔄 Continuar con nuevos retos</button>
+        </div>
+
+        <div class="timer-container">
+            <div class="timer" id="timer">⏰ Próxima pausa en: 25:00</div>
+            <button class="timer-btn" onclick="startTimer()">▶️ Iniciar</button>
+            <button class="timer-btn" onclick="resetTimer()">🔄 Reiniciar</button>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2><span class="card-icon">📊</span>Datos Importantes</h2>
+                <div class="dato">
+                    <strong>💡 ¿Sabías que?</strong><br>
+                    Estar sentado más de 6 horas al día aumenta el riesgo de muerte prematura en un 19%.
+                </div>
+                <div class="dato">
+                    <strong>🧠 Beneficio mental:</strong><br>
+                    Las pausas activas mejoran la concentración y reducen el estrés en un 40%.
+                </div>
+                <div class="dato">
+                    <strong>❤️ Salud cardiovascular:</strong><br>
+                    Moverse cada hora reduce el riesgo de enfermedades del corazón en un 30%.
+                </div>
+                <div class="dato">
+                    <strong>⚡ Productividad:</strong><br>
+                    Los trabajadores que hacen pausas activas son 23% más productivos.
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="card-icon">💡</span>Tips Esenciales</h2>
+                <div class="tip">🕐 Programa una alarma cada 60 minutos para recordar moverte</div>
+                <div class="tip">🚶‍♀️ Camina mientras hablas por teléfono</div>
+                <div class="tip">🤸‍♂️ Estira cuello y hombros cada 30 minutos</div>
+                <div class="tip">💧 Levántate a beber agua regularmente</div>
+                <div class="tip">👀 Practica la regla 20-20-20: cada 20 min, mira algo a 20 metros por 20 segundos</div>
+                <div class="tip">🌱 Coloca tu impresora o papelera lejos de tu escritorio</div>
+            </div>
+        </div>
+
+        <div class="retos-container">
+            <div class="retos-header">
+                <h2 class="retos-title">🏆 Retos Diarios</h2>
+                <button class="reset-btn" onclick="resetRetos()">🔄 Nuevos Retos</button>
+            </div>
+            <div id="retosContainer"></div>
+        </div>
+
+        <footer>
+            <p>🎓 Psicología de Nutrición - Universidad Católica de Córdoba | 💪 Juntos por un trabajo más saludable</p>
+        </footer>
+    </div>
+
+    <script>
+        const todosLosRetos = [
+            "🦵 Haz 15 sentadillas al lado de tu escritorio",
+            "🚶‍♀️ Camina 5 minutos por la oficina o tu casa",
+            "🤲 Realiza estiramientos de muñecas y dedos por 2 minutos",
+            "🕺 Baila tu canción favorita durante 3 minutos",
+            "🤸‍♂️ Haz 10 estiramientos de cuello suaves",
+            "💪 Realiza 10 flexiones contra la pared",
+            "🔄 Gira los hombros 15 veces hacia adelante y atrás",
+            "🧘‍♀️ Practica respiración profunda por 3 minutos",
+            "🦵 Levanta y baja las piernas 20 veces sentado",
+            "👁️ Practica ejercicios oculares mirando lejos y cerca",
+            "🤗 Abraza tus rodillas al pecho por 30 segundos",
+            "🏃‍♂️ Sube y baja escaleras 2 veces",
+            "🤲 Estira los brazos hacia arriba por 1 minuto",
+            "🦶 Camina de puntillas por 2 minutos",
+            "🔄 Haz círculos con los tobillos 10 veces cada pie",
+            "💺 Levántate y siéntate 15 veces sin usar las manos",
+            "🤸 Toca los dedos de los pies 10 veces",
+            "🕰️ Mantén una postura de guerrero por 1 minuto",
+            "🤲 Estira la espalda arqueándola suavemente",
+            "💨 Respira hondo y exhala lentamente 10 veces"
+        ];
+
+        let retosActivos = [];
+        let timerInterval;
+        let tiempoRestante = 25 * 60;
+
+        function generarRetosDelDia() {
+            retosActivos = [];
+            const retosSeleccionados = [...todosLosRetos].sort(() => Math.random() - 0.5).slice(0, 8);
+            
+            retosSeleccionados.forEach((reto, index) => {
+                retosActivos.push({
+                    id: index,
+                    texto: reto,
+                    completado: false
+                });
+            });
+
+            renderizarRetos();
+            document.getElementById('recompensaContainer').classList.remove('show');
+        }
+
+        function renderizarRetos() {
+            const container = document.getElementById('retosContainer');
+            container.innerHTML = '';
+
+            retosActivos.forEach(reto => {
+                const div = document.createElement('div');
+                div.className = `reto-item ${reto.completado ? 'completed' : ''}`;
+                div.innerHTML = `
+                    <div class="reto-checkbox ${reto.completado ? 'checked' : ''}" 
+                         onclick="toggleReto(${reto.id})"></div>
+                    <div class="reto-text">${reto.texto}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function toggleReto(id) {
+            retosActivos[id].completado = !retosActivos[id].completado;
+            renderizarRetos();
+            actualizarProgreso();
+            verificarRecompensa();
+        }
+
+        function actualizarProgreso() {
+            const completados = retosActivos.filter(r => r.completado).length;
+            const total = retosActivos.length;
+            const porcentaje = total > 0 ? (completados / total) * 100 : 0;
+
+            document.getElementById('progressFill').style.width = porcentaje + '%';
+            document.getElementById('progressText').textContent = 
+                `${Math.round(porcentaje)}% completado (${completados}/${total} retos)`;
+        }
+
+        function verificarRecompensa() {
+            const completados = retosActivos.filter(r => r.completado).length;
+            if (completados === 8) {
+                document.getElementById('recompensaContainer').classList.add('show');
+                document.getElementById('recompensaContainer').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function resetRetos() {
+            generarRetosDelDia();
+            actualizarProgreso();
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            
+            timerInterval = setInterval(() => {
+                tiempoRestante--;
+                
+                const minutos = Math.floor(tiempoRestante / 60);
+                const segundos = tiempoRestante % 60;
+                
+                document.getElementById('timer').textContent = 
+                    `⏰ Próxima pausa en: ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+                
+                if (tiempoRestante <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('timer').textContent = '🎉 ¡Es hora de tu pausa activa!';
+                    alert('¡Es hora de tu pausa activa! Realiza algunos de tus retos.');
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            tiempoRestante = 25 * 60;
+            document.getElementById('timer').textContent = '⏰ Próxima pausa en: 25:00';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            generarRetosDelDia();
+            actualizarProgreso();
+        });
+    </script>
+</body>
+</html>
