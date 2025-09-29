@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +29,7 @@
         header {
             text-align: center;
             padding: 40px 20px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(138, 243, 234, 0.8);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             margin-bottom: 30px;
@@ -246,7 +247,7 @@
             margin: 30px 0;
             background: white;
             border-radius: 15px;
-            padding: 20px;
+            padding: 25px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             border: 1px solid #e2e8f0;
         }
@@ -259,24 +260,72 @@
             border-radius: 30px;
             font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        .timer-btn {
-            margin: 0 10px;
+        .timer-options {
+            margin-bottom: 20px;
+        }
+
+        .timer-options h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .time-btn {
+            margin: 5px;
             background: white;
             color: #4299e1;
             border: 2px solid #4299e1;
-            padding: 10px 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .time-btn:hover {
+            background: #4299e1;
+            color: white;
+        }
+
+        .time-btn.active {
+            background: #4299e1;
+            color: white;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3);
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .timer-btn {
+            background: white;
+            color: #4299e1;
+            border: 2px solid #4299e1;
+            padding: 12px 25px;
             border-radius: 25px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1rem;
         }
 
         .timer-btn:hover {
             background: #4299e1;
             color: white;
+            transform: translateY(-2px);
+        }
+
+        .timer-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .recompensa-container {
@@ -328,6 +377,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -349,23 +399,76 @@
             h1 {
                 font-size: 2rem;
             }
-            
+
             .grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .retos-header {
                 flex-direction: column;
                 gap: 15px;
             }
+
+            .timer-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .timer-btn {
+                width: 200px;
+            }
+        }
+
+        .links-container {
+            background: rgba(138, 243, 234, 0.8);
+            border-radius: 15px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .links-container h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+
+        .links-container ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .links-container ul li {
+            margin: 12px 0;
+        }
+
+        .links-container a {
+            color: #4299e1;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .links-container a:hover {
+            color: #3182ce;
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
-            <h1>🏃‍♀️ Pausas Activas 🏃‍♂️</h1>
-            <p class="subtitle">Promoviendo el movimiento para una mejor salud en el trabajo</p>
+            <h1>🏃‍♀️ Activá tu Jornada 🏃‍♂️</h1>
+            <p class="subtitle">Promoviendo el movimiento para una mejor bienestar laboral</p>
+            <strong><P>"DESCANSÁ, ACTIVÁ, RENOVÁ"</P></strong>
         </header>
 
         <div class="progress-container">
@@ -379,17 +482,31 @@
         <div class="recompensa-container" id="recompensaContainer">
             <div class="recompensa-badge">🏆</div>
             <h2 class="recompensa-titulo">¡Felicidades! Has completado todos los retos</h2>
-            <p class="recompensa-mensaje">Has ganado la <strong>Insignia de Bienestar Laboral</strong>. ¡Sigue así para mantener tu energía y productividad al máximo!</p>
+            <p class="recompensa-mensaje">Has ganado la <strong>Insignia de Bienestar Laboral</strong>. ¡Sigue así para
+                mantener tu energía y productividad al máximo!</p>
             <div class="recompensa-tip">
-                💡 <strong>Tip nutricional extra:</strong> Después de tus pausas activas, hidrátate con un vaso de agua y come una fruta para recargar energías.
+                💡 <strong>Tip nutricional extra:</strong> Después de tus pausas activas, hidrátate con un vaso de agua
+                y come una fruta para recargar energías.
             </div>
-            <button class="reset-btn" onclick="resetRetos()" style="margin-top: 20px;">🔄 Continuar con nuevos retos</button>
+            <button class="reset-btn" onclick="resetRetos()" style="margin-top: 20px;">🔄 Continuar con nuevos
+                retos</button>
         </div>
 
         <div class="timer-container">
-            <div class="timer" id="timer">⏰ Próxima pausa en: 25:00</div>
-            <button class="timer-btn" onclick="startTimer()">▶️ Iniciar</button>
-            <button class="timer-btn" onclick="resetTimer()">🔄 Reiniciar</button>
+            <div class="timer" id="timer">⏰ Selecciona un tiempo para comenzar</div>
+
+            <div class="timer-options">
+                <h3>⏱️ Selecciona la duración de tu sesión:</h3>
+                <button class="time-btn" onclick="setTimer(30)">30 min</button>
+                <button class="time-btn active" onclick="setTimer(45)">45 min</button>
+                <button class="time-btn" onclick="setTimer(60)">60 min</button>
+            </div>
+
+            <div class="timer-controls">
+                <button class="timer-btn" id="startBtn" onclick="startTimer()">▶️ Iniciar Sesión</button>
+                <button class="timer-btn" onclick="pauseTimer()">⏸️ Pausar</button>
+                <button class="timer-btn" onclick="resetTimer()">🔄 Reiniciar</button>
+            </div>
         </div>
 
         <div class="grid">
@@ -397,30 +514,32 @@
                 <h2><span class="card-icon">📊</span>Datos Importantes</h2>
                 <div class="dato">
                     <strong>💡 ¿Sabías que?</strong><br>
-                    Estar sentado más de 6 horas al día aumenta el riesgo de muerte prematura en un 19%.
+                    Estar sentado más de 6 horas al día aumenta el riesgo de padecer diabetes tipo II y sobrepeso.
                 </div>
                 <div class="dato">
                     <strong>🧠 Beneficio mental:</strong><br>
-                    Las pausas activas mejoran la concentración y reducen el estrés en un 40%.
+                    Las pausas activas mejoran la concentración y reducen el estrés en un 40%, asi como ansiedad,
+                    depresión e insomnio
                 </div>
                 <div class="dato">
                     <strong>❤️ Salud cardiovascular:</strong><br>
-                    Moverse cada hora reduce el riesgo de enfermedades del corazón en un 30%.
+                    Moverse cada hora reduce el riesgo de enfermedades circulatorias en un 30%.
                 </div>
                 <div class="dato">
                     <strong>⚡ Productividad:</strong><br>
-                    Los trabajadores que hacen pausas activas son 23% más productivos.
+                    Los trabajadores que hacen pausas activas son 23% más eficientes, fomentando la creatividad,
+                    comunicación y trbajo en equipo.
                 </div>
             </div>
 
             <div class="card">
                 <h2><span class="card-icon">💡</span>Tips Esenciales</h2>
-                <div class="tip">🕐 Programa una alarma cada 60 minutos para recordar moverte</div>
-                <div class="tip">🚶‍♀️ Camina mientras hablas por teléfono</div>
-                <div class="tip">🤸‍♂️ Estira cuello y hombros cada 30 minutos</div>
+                <div class="tip">🧑🏼‍💻 Recordá mantener una postura erguida y la pantalla a una altura adecuada</div>
+                <div class="tip">🚶‍♀️ Llamadas telefonicas dando alguos pasos</div>
+                <div class="tip">🤸‍♂️ Practicá ejercicios de flexibilidad y liberá la tensión del estrés </div>
                 <div class="tip">💧 Levántate a beber agua regularmente</div>
                 <div class="tip">👀 Practica la regla 20-20-20: cada 20 min, mira algo a 20 metros por 20 segundos</div>
-                <div class="tip">🌱 Coloca tu impresora o papelera lejos de tu escritorio</div>
+                <div class="tip">🌱 Coloca tu impresora y basurero lejos de tu escritorio</div>
             </div>
         </div>
 
@@ -439,7 +558,7 @@
 
     <script>
         const todosLosRetos = [
-            "🦵 Haz 15 sentadillas al lado de tu escritorio",
+            "🦵 Haz 15 sentadillas con la ayuda de la silla de tu escritorio",
             "🚶‍♀️ Camina 5 minutos por la oficina o tu casa",
             "🤲 Realiza estiramientos de muñecas y dedos por 2 minutos",
             "🕺 Baila tu canción favorita durante 3 minutos",
@@ -450,25 +569,112 @@
             "🦵 Levanta y baja las piernas 20 veces sentado",
             "👁️ Practica ejercicios oculares mirando lejos y cerca",
             "🤗 Abraza tus rodillas al pecho por 30 segundos",
-            "🏃‍♂️ Sube y baja escaleras 2 veces",
+            "🏃‍♂️ Subí y baja escaleras 2 veces",
             "🤲 Estira los brazos hacia arriba por 1 minuto",
-            "🦶 Camina de puntillas por 2 minutos",
+            "🦶 Elevación de talones",
             "🔄 Haz círculos con los tobillos 10 veces cada pie",
             "💺 Levántate y siéntate 15 veces sin usar las manos",
             "🤸 Toca los dedos de los pies 10 veces",
-            "🕰️ Mantén una postura de guerrero por 1 minuto",
             "🤲 Estira la espalda arqueándola suavemente",
             "💨 Respira hondo y exhala lentamente 10 veces"
         ];
 
         let retosActivos = [];
         let timerInterval;
-        let tiempoRestante = 25 * 60;
+        let tiempoRestante = 45 * 60; // Por defecto 45 minutos
+        let tiempoSeleccionado = 45;
+        let timerPausado = false;
+
+        function setTimer(minutos) {
+            // Actualizar botones activos
+            document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            tiempoSeleccionado = minutos;
+            tiempoRestante = minutos * 60;
+
+            // Parar el timer si está corriendo
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+
+            // Actualizar display
+            actualizarDisplayTimer();
+            document.getElementById('startBtn').textContent = '▶️ Iniciar Sesión';
+            timerPausado = false;
+        }
+
+        function actualizarDisplayTimer() {
+            const minutos = Math.floor(tiempoRestante / 60);
+            const segundos = tiempoRestante % 60;
+
+            if (tiempoRestante > 0) {
+                document.getElementById('timer').textContent =
+                    `⏰ Tiempo restante: ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                document.getElementById('timer').textContent = '🎉 ¡Es hora de tu pausa activa!';
+            }
+        }
+
+        function startTimer() {
+            if (timerInterval) return; // Ya está corriendo
+
+            if (timerPausado) {
+                // Reanudar
+                timerPausado = false;
+            } else if (tiempoRestante <= 0) {
+                // Reiniciar si llegó a 0
+                tiempoRestante = tiempoSeleccionado * 60;
+            }
+
+            document.getElementById('startBtn').textContent = '▶️ Ejecutando...';
+
+            timerInterval = setInterval(() => {
+                tiempoRestante--;
+                actualizarDisplayTimer();
+
+                if (tiempoRestante <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    document.getElementById('startBtn').textContent = '▶️ Iniciar Nueva Sesión';
+
+                    // Notificación
+                    alert('¡Es hora de tu pausa activa! Realiza algunos de tus retos.');
+
+                    // Auto-reiniciar para la próxima sesión
+                    setTimeout(() => {
+                        tiempoRestante = tiempoSeleccionado * 60;
+                        actualizarDisplayTimer();
+                    }, 3000);
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                timerPausado = true;
+                document.getElementById('startBtn').textContent = '▶️ Reanudar';
+            }
+        }
+
+        function resetTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            tiempoRestante = tiempoSeleccionado * 60;
+            timerPausado = false;
+            actualizarDisplayTimer();
+            document.getElementById('startBtn').textContent = '▶️ Iniciar Sesión';
+        }
 
         function generarRetosDelDia() {
             retosActivos = [];
             const retosSeleccionados = [...todosLosRetos].sort(() => Math.random() - 0.5).slice(0, 8);
-            
+
             retosSeleccionados.forEach((reto, index) => {
                 retosActivos.push({
                     id: index,
@@ -510,7 +716,7 @@
             const porcentaje = total > 0 ? (completados / total) * 100 : 0;
 
             document.getElementById('progressFill').style.width = porcentaje + '%';
-            document.getElementById('progressText').textContent = 
+            document.getElementById('progressText').textContent =
                 `${Math.round(porcentaje)}% completado (${completados}/${total} retos)`;
         }
 
@@ -527,36 +733,25 @@
             actualizarProgreso();
         }
 
-        function startTimer() {
-            if (timerInterval) clearInterval(timerInterval);
-            
-            timerInterval = setInterval(() => {
-                tiempoRestante--;
-                
-                const minutos = Math.floor(tiempoRestante / 60);
-                const segundos = tiempoRestante % 60;
-                
-                document.getElementById('timer').textContent = 
-                    `⏰ Próxima pausa en: ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
-                
-                if (tiempoRestante <= 0) {
-                    clearInterval(timerInterval);
-                    document.getElementById('timer').textContent = '🎉 ¡Es hora de tu pausa activa!';
-                    alert('¡Es hora de tu pausa activa! Realiza algunos de tus retos.');
-                }
-            }, 1000);
-        }
-
-        function resetTimer() {
-            if (timerInterval) clearInterval(timerInterval);
-            tiempoRestante = 25 * 60;
-            document.getElementById('timer').textContent = '⏰ Próxima pausa en: 25:00';
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar al cargar la página
+        document.addEventListener('DOMContentLoaded', function () {
             generarRetosDelDia();
             actualizarProgreso();
+            actualizarDisplayTimer();
         });
     </script>
+
+    <div class="links-container">
+        <h2>🎵 Recursos para tus pausas activas</h2>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=_ez7xHGHG28" target="_blank"
+                    rel="noopener noreferrer">💪 Playlist de ejercicios para pausas activas</a></li>
+            <li><a href="https://www.youtube.com/watch?v=jfKfPfyJRdk" target="_blank"
+                    rel="noopener noreferrer">🎧 Playlist de música lofi para relajarte</a></li>
+        </ul>
+    </div>
+
+
 </body>
+
 </html>
